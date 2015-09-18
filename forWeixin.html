@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>Light | 每个人都是一个发光体</title>
+</head>
+<body style="overflow: hidden;">
+
+<!--if weixin-->
+<script type="text/javascript">
+
+    var is_weixin = (function() {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            return true;
+        } else {
+            return false;
+        }
+    })();
+    function loadHtml_weixin(){
+        var div = document.createElement('div');
+        div.id = 'weixin-tip';
+        div.innerHTML = '<p><img src="./live_weixin.png" alt="微信打开"></p>';
+        document.body.appendChild(div);
+    }
+
+    function loadStyleText(cssText) {
+        var style = document.createElement('style');
+        style.rel = 'stylesheet';
+        style.type = 'text/css';
+        try {
+            style.appendChild(document.createTextNode(cssText));
+        } catch (e) {
+            style.styleSheet.cssText = cssText; //ie9以下
+        }
+        var head=document.getElementsByTagName("head")[0]; //head标签之间加上style样式
+        head.appendChild(style);
+    }
+    var cssText = "#weixin-tip{display:block;position:fixed;left:0;top:0;background:rgba(0,0,0,0.8);filter:alpha(opacity=80);width:100%;height:100%;z-index:100}#weixin-tip p{text-align:center;margin-top:10%;padding:0 3%;position:relative}#weixin-tip p img{max-width: 100%;height: auto;}";
+
+    if(is_weixin){
+        loadHtml_weixin();
+        loadStyleText(cssText);
+        var winHeight = typeof window.innerHeight != 'undefined' ? window.innerHeight : document.documentElement.clientHeight;
+        var tip = document.getElementById('weixin-tip');
+        tip.style.height = winHeight + 'px';
+
+    }
+
+</script>
+</body>
+</html>
